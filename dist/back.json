@@ -1,0 +1,102 @@
+{
+  "idea": {
+    "id": "i-crewstreet",
+    "title": "Crew St.",
+    "pitch": "It is a platform which makes it easier for entrepreneurs to assemble teams and helps individuals find the most suitable projects.",
+    "descriptions": "Users will have a unique opportunity to bring their idea to life with like-minded people from a friendly and diverse community. \nTherefore, whether they want to develop a mobile application or create their own animated series, they will find the most suitable idea and team!\n\nRight now project is in an early stage of development and we are still searching for people who'd like to join our team.",
+    "media": [
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/watch?v=_BMBDY01kPk",
+        "placement": "t"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1601758066440-cbfc06a82914",
+        "placement": "b"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1534803359379-964dadf6c290",
+        "placement": "b"
+      }
+    ],
+    "jobs": [
+      {
+        "title": "Vector Artist",
+        "description": "You will draw vector arts for our website and mobile app",
+        "requirements": [
+          ["English Level", "C1+"],
+          ["Unique art style"]
+        ]
+      },
+      {
+        "title": "Lead Android Developer",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "requirements": [
+          ["Years of Work Experience", "3+"],
+          ["Understanding of OOP"],
+          ["Solid experience with SOLID"]
+        ]
+      }
+    ],
+    "team": [
+      {
+        "userId": "hf3uyrhvf328yfvyh23vf432",
+        "title": "Mobile developer"
+      },
+      {
+        "userId": "hbeSBDFA932rgUdug9Gjubug",
+        "title": "Web developer"
+      }
+    ],
+    "roadmap": [
+      {
+        "label": "Start",
+        "date": "25/05/2021"
+      },
+      {
+        "label": "Team Assembled",
+        "date": "01/06/2021",
+        "details": "Our team consists of 8 people)"
+      },
+      {
+        "label": "Release",
+        "date": "04/08/2021",
+        "details": "Will be available at crestreet.com. You will be able to participate in testing."
+      }
+    ]
+  },
+  "user": {
+    "uid": "875sdcf3uyrhvf328yfvyh23vf",
+    "name": "Mr. User",
+    "picture": "https://images.unsplash.com/photo-1534803359379-964dadf6c290",
+    "pitch": "A am a human!",
+    "skills": [
+      {
+        "title": "React Web Development",
+        "details": "React components implement a render() method that takes input data and returns what to"
+      },
+      {
+        "title": "Android Kotlin Development",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      }
+    ],
+    "roadmap": [
+      {
+        "label": "Android School",
+        "date": "05/2020",
+        "details": "Samsung IT school: Native Android Development"
+      },
+      {
+        "label": "Created website",
+        "date": "07/2020",
+        "details": "Created my CV"
+      },
+      {
+        "label": "Web Meetup",
+        "date": "01/2021"
+      }
+    ]
+  }
+}
