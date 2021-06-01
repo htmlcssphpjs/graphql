@@ -1,4 +1,5 @@
-from graphene import ObjectType, List, String, Schema, ID, Field, Mutation
+import strawberry
+from typing import Optional, List
 import uvicorn, json, hashlib, os
 from fastapi import FastAPI
 from starlette.graphql import GraphQLApp
@@ -37,54 +38,53 @@ def hash_password(password):
     return h.hexdigest()
 
 
-class UsersType(ObjectType):
-  id = ID()
-  name = String()
-  fullname = String()
-  username = String()
-  mail = String()
-  hashed_password = String()
-  resume = String()
+@strawberry.type
+class UsersType:
+  id: str
+  name: str
+  fullname:str
+  username:str
+  mail:str
+  hashed_password:str
+  resume: Optional[str]
 
-class CreateUser(Mutation):
-    user = Field(UsersType)
+#class CreateUser:
+#
+#    class Arguments:
+#        id = ID(required=True)
+#        name = String(required=True)
+#        fullname = String(required=True)
+#        username = String(required=True)
+#        mail = String(required=True)
+#        hashed_password = String(required=True)
+#        resume = String()
+#
+#    def mutate(self, info, id, name, fullname, username, mail, hashed_password, resume):
+#        session = db_session.create_session()
+#        Create = []
+#
+#        user = User(
+#            id=id,
+#            name=name,
+#            fullname=fullname,
+#            username=username,
+#            mail=mail,
+#            hashed_password=hash_password(hashed_password),
+#            resume=resume
+#		)
+#        session.add(user)
+#        session.commit()
+#        Create.append({"error": "None", "username": username})
+#        
+#        return Create[-1]
 
-    class Arguments:
-        id = ID(required=True)
-        name = String(required=True)
-        fullname = String(required=True)
-        username = String(required=True)
-        mail = String(required=True)
-        hashed_password = String(required=True)
-        resume = String()
+#class Mutation:
+#    create_user = CreateUser.Field()
 
-    def mutate(self, info, id, name, fullname, username, mail, hashed_password, resume):
-        session = db_session.create_session()
-        Create = []
-
-        user = User(
-            id=id,
-            name=name,
-            fullname=fullname,
-            username=username,
-            mail=mail,
-            hashed_password=hash_password(hashed_password),
-            resume=resume
-		)
-        session.add(user)
-        session.commit()
-        Create.append({"error": "None", "username": username})
-        
-        return Create[-1]
-
-class Mutation(ObjectType):
-    create_user = CreateUser.Field()
-
-class Query(ObjectType):
-    users_list = None
-    get_users = Field(List(UsersType), id=String())
-
-    def resolve_get_users(self, info, id=None):
+@strawberry.type
+class Query:
+    @strawberry.field
+    def get_users(self, id: Optional[str] = None) -> List[UsersType]:
         session = db_session.create_session()
         user_all = session.query(User).all()
         users_list = []
@@ -98,6 +98,7 @@ class Query(ObjectType):
                         fullname=user.fullname,
                         username=user.username,
                         mail=user.mail,
+                        hashed_password=user.hashed_password,
                         resume=user.resume
                     )
                     users_list.append(user_as_dict)
@@ -109,6 +110,7 @@ class Query(ObjectType):
                     fullname=user.fullname,
                     username=user.username,
                     mail=user.mail,
+                    hashed_password=user.hashed_password,
                     resume=user.resume
                 )
                 users_list.append(user_as_dict)
@@ -124,20 +126,11 @@ async def main():
 #    schema=Schema(query=Query))
 #)
 
-introspection_dict = Schema.introspect()
-
-# Print the schema in the console
-print(json.dump(introspection_dict))
-
-# Or save the schema into some file
-open('schema.json', ‘w’) as fp:
-    json.dump(introspection_dict, fp)
-
 app.add_route(
     "/api", GraphQLApp(
-        schema=Schema(
+        schema=strawberry.Schema(
             query=Query, 
-            mutation=Mutation
+            #mutation=Mutation
         )
     )
 )
