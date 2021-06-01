@@ -19,7 +19,7 @@
 
 ```
 mutation {
-  mutate(
+  createUser(
     id: "vsecoder"
     name: "Всеволод"
     pitch: "Coding all in my live!"
