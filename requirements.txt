@@ -1,5 +1,5 @@
 sqlalchemy
 fastapi
 graphene
-unicorn
+gunicorn
 starlette
