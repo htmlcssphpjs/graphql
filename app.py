@@ -26,28 +26,31 @@ class UsersType:
     email: str
     hashed_password: str
 
-#@strawberry.type
-#class Mutation:
-#    @strawberry.field
-#    def mutate(self, info, id: str, name: str, pitch: str, picture: str, skills: Optional[str], roadmap: Optional[str], email: str, hashed_password: str) -> Create:
-#        session = db_session.create_session()
-#        Create = []
-#
-#        user = User(
-#            id=id,
-#            name=name,
-#            pitch=pitch,
-#            picture=picture,
-#            skills=skills,
-#            roadmap=roadmap,
-#            email=email,
-#            hashed_password=hash_password(hashed_password)
-#		)
-#        session.add(user)
-#        session.commit()
-#        Create.append({"error": "None", "id": id})
-#        
-#        return Create
+@strawberry.type
+class Mutation:
+    Create = []
+    @strawberry.field
+    def create_user(self, id: str, name: str, pitch: str, picture: str, skills: str, roadmap: str, email: str, hashed_password: str) -> Create:
+        session = db_session.create_session()
+        print(1)
+        Create = []
+
+        user = User(
+            id=id,
+            name=name,
+            pitch=pitch,
+            picture=picture,
+            skills=skills,
+            roadmap=roadmap,
+            email=email,
+            hashed_password=hash_password(hashed_password)
+        )
+        print(2)
+        session.add(user)
+        session.commit()
+        Create.append({"error": "None", "id": id})
+        
+        return Create
 
 
 @strawberry.type
@@ -94,7 +97,7 @@ schema = strawberry.Schema(query=Query)
 app.add_url_rule(
     "/graphql",
     view_func=GraphQLView.as_view(
-        "graphql_view", schema=schema, #mutation=Mutation
+        "graphql_view", schema=schema, mutation=Mutation
     ),
 )
 
