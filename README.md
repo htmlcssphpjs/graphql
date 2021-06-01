@@ -2,7 +2,8 @@
 
 ## get users
 
-```{
+```
+{
   getUsers {
     id
     name
@@ -11,7 +12,8 @@
     mail
     resume
   }
-}```
+}
+```
 
 ## create user
 
