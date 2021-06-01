@@ -4,3 +4,4 @@ graphene
 gunicorn
 uvicorn
 starlette
+strawberry
