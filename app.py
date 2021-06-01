@@ -124,6 +124,15 @@ async def main():
 #    schema=Schema(query=Query))
 #)
 
+introspection_dict = Schema.introspect()
+
+# Print the schema in the console
+print json.dump(introspection_dict)
+
+# Or save the schema into some file
+open('schema.json', ‘w’) as fp:
+    json.dump(introspection_dict, fp)
+
 app.add_route(
     "/api", GraphQLApp(
         schema=Schema(
