@@ -7,19 +7,10 @@ class User(SqlAlchemyBase):
 
     id = sa.Column(sa.Integer,
                    primary_key=True, autoincrement=True)
-    name = sa.Column(sa.String, nullable=True)
-    fullname = sa.Column(sa.Integer, autoincrement=True)
-    username = sa.Column(sa.String, nullable=True)
-    mail = sa.Column(sa.Integer, autoincrement=True)
+    name = sa.Column(sa.String)
+    pitch = sa.Column(sa.Integer, autoincrement=True, nullable=True)
+    picture = sa.Column(sa.String, nullable=True)
+    email = sa.Column(sa.Integer, autoincrement=True)
+    skills = sa.Column(sa.Integer, autoincrement=True, nullable=True)
+    roadmap = sa.Column(sa.Integer, autoincrement=True, nullable=True)
     hashed_password = sa.Column(sa.Integer, autoincrement=True)
-    resume = sa.Column(sa.Integer, autoincrement=True)
-
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "fullname": self.fullname,
-            "username": self.username,
-            "mail": self.mail,
-            "resume": self.resume
-        }
