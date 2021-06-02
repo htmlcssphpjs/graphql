@@ -15,6 +15,23 @@
 }
 ```
 
+## find user
+
+```
+{
+  getUsers(id: "admin") {
+    id
+    name
+    pitch
+    picture
+    skills
+    roadmap
+    email
+    hashedPassword
+  }
+}
+```
+
 ## create user
 
 ```
@@ -29,14 +46,8 @@ mutation {
     email: "kreepmeister@yandex.ru"
     hashedPassword: "password"
   ) {
+    error
     id
-    name
-    pitch
-    picture
-    skills
-    roadmap
-    email
-    hashedPassword
   }
 }
 ```
