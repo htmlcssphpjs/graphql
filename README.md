@@ -7,10 +7,12 @@
   getUsers {
     id
     name
-    username
-    fullname
-    mail
-    resume
+    pitch
+    picture
+    skills
+    roadmap
+    email
+    hashedPassword
   }
 }
 ```
