@@ -27,28 +27,47 @@ class UsersType:
     hashed_password: str
 
 @strawberry.type
+class Result:
+    error: str
+    id: str
+
+@strawberry.type
 class Mutation:
     Create = []
-    @strawberry.field
-    def create_user(self, id: str, name: str, pitch: str, picture: str, skills: str, roadmap: str, email: str, hashed_password: str) -> Create:
-        session = db_session.create_session()
-        Create = []
 
-        user = User(
-            id=id,
-            name=name,
-            pitch=pitch,
-            picture=picture,
-            skills=skills,
-            roadmap=roadmap,
-            email=email,
-            hashed_password=hash_password(hashed_password)
-        )
-        session.add(user)
-        session.commit()
-        Create.append({"error": "None", "id": id})
-        
-        return Create
+    @strawberry.mutation
+    def create_user(self, id: str, name: str, pitch: str, picture: str, skills: str, roadmap: str, email: str, hashed_password: str) -> List[Result]:
+        try:
+            session = db_session.create_session()
+            Create = []
+
+            user = User(
+                id=id,
+                name=name,
+                pitch=pitch,
+                picture=picture,
+                skills=skills,
+                roadmap=roadmap,
+                email=email,
+                hashed_password=hash_password(hashed_password)
+            )
+            session.add(user)
+            session.commit()
+            result = Result(
+                error='None',
+                id=id
+            )
+            Create.append(result)
+
+            return Create
+        except:
+            Create = []
+            result = Result(
+                error='ID is busy',
+                id='None'
+            )
+            Create.append(result)
+            return Create
 
 
 @strawberry.type
@@ -91,11 +110,11 @@ class Query:
         return users_list
 
 
-schema = strawberry.Schema(query=Query)
+schema = strawberry.Schema(query=Query, mutation=Mutation)
 app.add_url_rule(
     "/graphql",
     view_func=GraphQLView.as_view(
-        "graphql_view", schema=schema, mutation=Mutation
+        "graphql_view", schema=schema#, mutation=Mutation
     ),
 )
 
