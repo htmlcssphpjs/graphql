@@ -1,3 +1,4 @@
 sqlalchemy
 flask
 strawberry-graphql
+jinja2
